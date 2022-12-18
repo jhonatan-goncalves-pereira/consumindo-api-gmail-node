@@ -4,6 +4,7 @@ para continuar você presirá verificar se possuí instalados no seu ambiente:
 - npm
 - yarn
 - node
+- express
 
 ## Se já possue instalados pule essa parte
 Para instalação do Node siga o Link 
@@ -25,6 +26,42 @@ https://lilinguas.com/erro-powershell-o-ficheiro-n%C3%A3o-est%C3%A1-assinado-dig
 
 https://lilinguas.com/erro-powershell-o-ficheiro-n%C3%A3o-est%C3%A1-assinado-digitalmente/
 
+## PREPARANDO AMBIENTE
+comando yarn init -y
+- cria o package.json
+
+acesse o Express, caso ainda não tenha instalado use:  yarn add express
+- usado para criar rotas
+
+
+- crie o index.js para importar o express e adicione o código
+
+- para testar abra o diretório no terminal e insira o node index.js
+
+- aí só abrir o navegador na porta pra ver o servidor rodando
+
+- instale o nodemon com o comando no terminal
+-- abra um novo terminal ou pare com Ctrl + C a execução do servidor
+
+- yarn add nodemon -D
+que serve para restart após todas as alterações do arquivo e teclado ctrl + S
+
+- agora vá em package.json e set no arquivo 
+"scripts":{
+    "start":"nodemon index.js"
+}
+
+adicionado no package.json agora para acesso use o yarn start em vez de node index.js
+
+
+- criando rota para testar, adicione no index.js: 
+use: server.get('/', (req, res)=>{
+    return res.send({message:"Hello, World of Jhonatan Gonçalves Pereira!"})
+});
+
+salve e abra no navegador pela porta usada, aqui no caso a porta 8000, se deu erro troque a porta no arquivo index.js, pois o erro é por provalvelmente a porta já está sendo usada.
+
+para a visualização no Edge será diferente
 ## SOBRE A API 
 LINK DA API do GMAIL
 
