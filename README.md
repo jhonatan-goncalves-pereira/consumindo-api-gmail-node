@@ -1,4 +1,4 @@
-# consumindo API GMAL com NODE JS
+# consumindo API GMAL com NODE JS e enviando mensagens para outras pessoas 
 
 para continuar você presirá verificar se possui instalados no seu ambiente:
 >- **npm**: é uma ferramenta de linha de comando que ajuda a interagir com plataformas online, como navegadores e servidores. 
@@ -209,7 +209,7 @@ As informações de autorização são armazenadas no sistema de arquivos, porta
 > Você criou com êxito seu primeiro aplicativo Nodejs que faz solicitações para a API do Gmail.
 ![Captura de tela 2022-12-19 010009](https://user-images.githubusercontent.com/94761781/208345424-915ce043-69aa-44c3-a9c8-5299d9ca9e08.png)
 
-## enviar mensagens com anexos de imagem usando a biblioteca Nodemailer
+## enviar mensagens para outras pessoas usando a API 
 
 crie a pasta "enviar-email-com-anexo" e abra no terminal para executar:
 > npm init -y
@@ -308,7 +308,11 @@ Depois de obter o accessToken. Basta colá-lo dentro do script do index.js.
 ![13](https://user-images.githubusercontent.com/94761781/208381497-dcdeacc5-c4b8-4a9e-8ba2-f26ac70cbcdf.png)
 
 - verifque o e-mail
-- ![final](https://user-images.githubusercontent.com/94761781/208451196-eb9b1347-dd70-4967-91d2-2a52283567fc.png)
+
+
+Envio do e-mail
+![d](https://user-images.githubusercontent.com/94761781/208381509-c9d4b69f-c95e-4d6e-9c56-610c56a78f30.png)
+
 
 ## Envio de emails partindo de um Form HTML5
 - crie o arquivo form.js e digite o seguinte código;
