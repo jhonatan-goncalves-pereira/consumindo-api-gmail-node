@@ -1,12 +1,12 @@
-# ✉️📩consumindo API📧GMAL com NODE JS
+# consumindo API GMAL com NODE JS
 
-🎬 para continuar você presirá verificar se possui instalados no seu ambiente:
+para continuar você presirá verificar se possui instalados no seu ambiente:
 >- **npm**: é uma ferramenta de linha de comando que ajuda a interagir com plataformas online, como navegadores e servidores. 
 >- **yarn**: é um gerenciador de pacotes para aplicar comandos prontos ao código de uma aplicação.
 >- **node**: é um runtime, que nada mais é do que um conjunto de códigos, API's, ou seja, são bibliotecas responsáveis pelo tempo de execução (é o que faz o seu programa rodar) que funciona como um interpretador de JavaScript fora do ambiente do navegador web.
 >- **express**:  é a estrutura da web Node. js mais popular. O que ele fornece é um vasto conjunto de recursos para a construção de aplicativos da web (única, várias páginas e híbrida). Com o Express, você pode estruturar um aplicativo da web que pode lidar com várias solicitações HTTP em um determinado URL.
 
-## ⚠️⚠️ Se já tiver essas ferramentas acima instaladas pule este tópico
+## Se já tiver essas ferramentas instaladas pule esta tópico
 Para instalação do Node siga o Link 
 >[Node](https://nodejs.org/en/download/)
 
@@ -20,23 +20,22 @@ Verifique a versão com
 Se ao tentar verificar a versão tiver erros como e essa for a saída:
 >- AppData\Roaming\npm\yarn.ps1 não pode ser carregado porque a execução de scripts foi desabilitada neste sistema. Para obter mais informações, consulte about_Execution_Policies em https://go.microsoft.com/fwlink/?LinkID=135170.
 
- - 💡Acesse aqui:[ Resolução - habilitar carregamento de scripts no sistema]( https://pt.stackoverflow.com/questions/220078/o-que-significa-o-erro-execu%c3%a7%c3%a3o-de-scripts-foi-desabilitada-neste-sistema)
+ - Acesse aqui:[ Resolução - habilitar carregamento de scripts no sistema]( https://pt.stackoverflow.com/questions/220078/o-que-significa-o-erro-execu%c3%a7%c3%a3o-de-scripts-foi-desabilitada-neste-sistema)
 
 Se após isso ao executar o erro persistir e mostrar isso:
 >- AppData\Roaming\npm\yarn.ps1 não pode ser carregado. O arquivo C:\Users\jhona\AppData\Roaming\npm\yarn.ps1 não está assinado digitalmente. Não é possível executar este script no sistema atual. Para obter mais informações sobre como executar scripts e definir a política de execução,    consulte about_Execution_Policies at https://go.microsoft.com/fwlink/?LinkID=135170.
 
-- 💁‍♂️tente o descrito aqui: [Executar Script não assinado digitalmente](https://lilinguas.com/erro-powershell-o-ficheiro-n%C3%A3o-est%C3%A1-assinado-digitalmente/)
+tente o descrito aqui: [Executar Script não assinado digitalmente](https://lilinguas.com/erro-powershell-o-ficheiro-n%C3%A3o-est%C3%A1-assinado-digitalmente/)
 
 
 
-## ⚙️PREPARANDO AMBIENTE
+## PREPARANDO AMBIENTE
 
 cria o package.json
 > comando yarn init -y
-a flag -y salta uma série de perguntas
 
-tenha o Express(usado para criar rotas - URL que acessaremos), caso ainda não tenha instalado execute:
->  yarn add express
+tenha o Express(usado para criar rotas), caso ainda não tenha instalado execute:
+>   yarn add express
 
 instale o nodemon com o comando no terminal
 > yarn add nodemon -D
@@ -67,6 +66,7 @@ salve e abra no navegador pela porta usada, aqui no caso a porta 8000, se deu er
 
 para a visualização no Edge será diferente
 
+<<<<<<< HEAD
 ## 📧 API GMAIL DO GOOGLE e PROJETO DO GOOGLE CLOUD E CREDENCIAS
 ##### 💡é uma API RESTful que pode ser usada para acessar caixas de correio do Gmail e enviar e-mail. 
 Para a maioria dos aplicativos da Web, a API do Gmail é a melhor escolha para acesso autorizado aos dados do Gmail de um usuário e é adequado para vários aplicações, tais como:
@@ -256,22 +256,3 @@ Há duas maneiras de enviar e-mails usando a API do Gmail:
 Os e-mails são enviados como cadeias de caracteres codificadas em base64url dentro da propriedade de um recurso de mensagem. 
 
 ##### criando mensagens
-A API do Gmail requer mensagens de e-mail MIME compatíveis com RFC 2822 e codificado como cadeias de caracteres base64url. Muitas linguagens de programação têm bibliotecas ou utilitários que simplificam o processo de criação e codificação MIME Mensagens. 
-
-
-
-
-## Execução
-- Escolher uma API pública (https://any-api.com/, ou qualquer outra, e **deve ser diferente dos demais colegas**);
-- Consumir essa API através do nodejs (recomendado uso de docker, se possível);
-- Criar uma página html para fazer consultas pela API (pode ser bem simples, o layout não será avaliado).
-
-## Entrega
-- Aceitar o convite do repositório da sprint-2-pb-aws-ifce;
-- Criar uma branch no repositório com o formato nome-sobrenome (Exemplo: daniel-muller);
-- **Conferir se a API desejada já não foi escolhida por algum colega**;
-- Subir o trabalho na branch com um readme.md, documentando detalhes sobre como a avaliação foi desenvolvida, dificuldades conhecidas e como utilizar o sistema;
-- O prazo de entrega é até às 12h do dia 19/12/2022 no repositório do github (https://github.com/Compass-pb-aws-2022-IFCE/sprint-2-pb-aws-ifce).
-
----
----
