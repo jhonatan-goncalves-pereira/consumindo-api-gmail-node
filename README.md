@@ -27,6 +27,39 @@ Se após isso ao executar o erro persistir e mostrar isso:
 
 tente o descrito aqui: [Executar Script não assinado digitalmente](https://lilinguas.com/erro-powershell-o-ficheiro-n%C3%A3o-est%C3%A1-assinado-digitalmente/)
 
+## ENTENDENDO COMO FUNCIONA 
+
+cria o package.json
+> comando yarn init -y
+tenha o Express(usado para criar rotas), caso ainda não tenha instalado execute:
+>   yarn add express
+instale o nodemon com o comando no terminal
+> yarn add nodemon -D
+- nodemon é uma ferramenta que ajuda a desenvolver aplicativos baseados em Node.js, reiniciando automaticamente o aplicativo do nó quando as alterações de arquivo no diretório são detectadas.
+crie o index.js para importar o express e adicione o código
+![01 - index js](https://user-images.githubusercontent.com/94761781/208316531-f3ccc413-36bf-4c16-9b03-ce6e4decd299.png)
+
+- agora vá em package.json e adicione o código no arquivo 
+>"scripts":{
+    "start":"nodemon index.js"
+}
+![02 -json](https://user-images.githubusercontent.com/94761781/208316533-14c9b6cc-5ade-46e1-8f81-6f912f754a53.png)
+
+
+Agora você pode usar o **yarn start** em vez de node index.js para testar e ter mais praticidade em alterações
+
+
+crie uma rota para testar, adicione no index.js: 
+adicione:
+> server.get('/', (req, res)=>{
+    return res.send({message:"Hello, World of Jhonatan Gonçalves Pereira!"})
+});
+![03 - index js](https://user-images.githubusercontent.com/94761781/208316534-0974f071-b79d-45ca-aa08-d59801dca09d.png)
+salve e abra no navegador pela porta usada, aqui no caso a porta 8000, se deu erro troque a porta no arquivo index.js, pois o erro é por provalvelmente a porta já está sendo usada.
+
+para a visualização no Edge será diferente
+
+
 
 ## 📧 API GMAIL DO GOOGLE e PROJETO DO GOOGLE CLOUD E CREDENCIAS
 ##### 💡é uma API RESTful que pode ser usada para acessar caixas de correio do Gmail e enviar e-mail. 
