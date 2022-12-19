@@ -28,45 +28,6 @@ Se após isso ao executar o erro persistir e mostrar isso:
 tente o descrito aqui: [Executar Script não assinado digitalmente](https://lilinguas.com/erro-powershell-o-ficheiro-n%C3%A3o-est%C3%A1-assinado-digitalmente/)
 
 
-
-## PREPARANDO AMBIENTE
-
-cria o package.json
-> comando yarn init -y
-
-tenha o Express(usado para criar rotas), caso ainda não tenha instalado execute:
->   yarn add express
-
-instale o nodemon com o comando no terminal
-> yarn add nodemon -D
-- nodemon é uma ferramenta que ajuda a desenvolver aplicativos baseados em Node.js, reiniciando automaticamente o aplicativo do nó quando as alterações de arquivo no diretório são detectadas.
-
-crie o index.js para importar o express e adicione o código
-![01 - index js](https://user-images.githubusercontent.com/94761781/208316531-f3ccc413-36bf-4c16-9b03-ce6e4decd299.png)
-
-- agora vá em package.json e adicione o código no arquivo 
->"scripts":{
-    "start":"nodemon index.js"
-}
-![02 -json](https://user-images.githubusercontent.com/94761781/208316533-14c9b6cc-5ade-46e1-8f81-6f912f754a53.png)
-
-
-
-Agora você pode usar o **yarn start** em vez de node index.js para testar e ter mais praticidade em alterações
-
-
-crie uma rota para testar, adicione no index.js: 
-adicione:
-> server.get('/', (req, res)=>{
-    return res.send({message:"Hello, World of Jhonatan Gonçalves Pereira!"})
-});
-![03 - index js](https://user-images.githubusercontent.com/94761781/208316534-0974f071-b79d-45ca-aa08-d59801dca09d.png)
-
-salve e abra no navegador pela porta usada, aqui no caso a porta 8000, se deu erro troque a porta no arquivo index.js, pois o erro é por provalvelmente a porta já está sendo usada.
-
-para a visualização no Edge será diferente
-
-<<<<<<< HEAD
 ## 📧 API GMAIL DO GOOGLE e PROJETO DO GOOGLE CLOUD E CREDENCIAS
 ##### 💡é uma API RESTful que pode ser usada para acessar caixas de correio do Gmail e enviar e-mail. 
 Para a maioria dos aplicativos da Web, a API do Gmail é a melhor escolha para acesso autorizado aos dados do Gmail de um usuário e é adequado para vários aplicações, tais como:
@@ -248,11 +209,105 @@ As informações de autorização são armazenadas no sistema de arquivos, porta
 > Você criou com êxito seu primeiro aplicativo Nodejs que faz solicitações para a API do Gmail.
 ![Captura de tela 2022-12-19 010009](https://user-images.githubusercontent.com/94761781/208345424-915ce043-69aa-44c3-a9c8-5299d9ca9e08.png)
 
+## enviar mensagens com anexos de imagem usando a biblioteca Nodemailer
 
-## Criar e enviar e-mails
-Há duas maneiras de enviar e-mails usando a API do Gmail:
-- enviar diretamente usando o método ```messages.send```.
-- enviar de um rascunho, usando o método ```drafts.send```.
-Os e-mails são enviados como cadeias de caracteres codificadas em base64url dentro da propriedade de um recurso de mensagem. 
+crie a pasta "enviar-email-com-anexo" e abra no terminal para executar:
+> npm init -y
+Isso criará o arquivo package.json para o projeto.
+ Agora precisamos instalar os pacotes abaixo, conforme mostrado abaixo
 
-##### criando mensagens
+> npm i express
+
+>npm i nodemailer
+
+- Express será o servidor web para esta aplicação e nodemailer nos permitirá enviar mensagens usando a api do gmail.
+
+
+- crie o arquivo index.js e agtribua o seguinte código:
+```
+const nodemailer = require("nodemailer");
+
+const CLIENT_ID = "##yourclientid##";
+
+const CLIENT_SECRET = "##yourclientsecret##";
+
+async function sendEmail() {
+  try {
+    const transport = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        type: "OAuth2",
+        user: "geekygautam1997@gmail.com",
+        clientId:CLIENT_ID,
+        clientSecret:CLIENT_SECRET,
+        accessToken: "##youraccesstoken##",
+      },
+    });
+
+    const mailOptions = {
+        from:"geekygautam1997@gmail.com",
+        to:"sharmagautam1997dob@gmail.com",
+        subject:"this is the test email",
+        text:"hello this is the body of the email",
+        html:"<h1>Hello World</h1>"
+    }
+
+    const result = await transport.sendMail(mailOptions)
+
+    return result
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+sendEmail()
+.then((result) => {
+    console.log("Email has been sent")
+})
+.catch((error) => {
+    console.log(`An ${error} occured`)
+})
+```
+
+
+###### agora é necessário substituir:
+- clientid, clientsecret e accesstoken da conta do console do Projeto Google Cloud. 
+pode criar o ID do cliente OAuth2, mas no meu caso já criamos na abordagem anterior, veja abaixo
+![2](https://user-images.githubusercontent.com/94761781/208373781-821122e6-688d-4eb4-b79b-faa3209572a1.png)
+
+Na sequência, para o accesstoken,  acesse aqui: [AcessToken]( https://developers.google.com/oauthplayground/) e, a partir disso,  é necessário selecionar a api e os escopos e, em seguida, dar a permissão e ainda trocar o código de autorização com o token de acesso, conforme mostrado abaixo.
+- selecione a seguinte opção
+![4](https://user-images.githubusercontent.com/94761781/208375175-fbdd29c3-9541-426f-92cf-7e5d68bbadd4.png)
+- vai abrir a tela de confirmação pra escolha do e-mail
+![5](https://user-images.githubusercontent.com/94761781/208375178-00960b78-f202-4a48-8f87-ec2f44ed8672.png)
+- pede a autorização
+![6](https://user-images.githubusercontent.com/94761781/208375181-0a807a60-7d1c-4f2c-b623-98ae0c9dd9d9.png)
+- e adiciona
+![7](https://user-images.githubusercontent.com/94761781/208375183-b7db246e-64fc-4d85-aa77-36e49d17d35a.png)
+- tecle no botão azul  o código  de autorização do Exchange para tokens e mostrará uma atualização e um token de acesso necessários para acessar os recursos protegidos por OAuth.
+
+![8](https://user-images.githubusercontent.com/94761781/208375956-7d09c4fe-12bd-40e4-92ab-d8ba7943227e.png)
+
+agora seguir para a terceira etapa:
+> Configurar a solicitação para a API
+- Constrói solicitação HTTP especificando o URI, o Método HTTP, os cabeçalhos, o tipo de conteúdo e o corpo da solicitação.
+Em seguida, só clicar no botão "Enviar a solicitação" para iniciar a solicitação HTTP.
+
+
+![11](https://user-images.githubusercontent.com/94761781/208377900-28266ad4-d1c3-4227-874e-a062d1424150.png)
+copie e cole rapidamente, pois é por tempo limitado
+Depois de obter o accessToken. Basta colá-lo dentro do script do index.js. 
+![10](https://user-images.githubusercontent.com/94761781/208377897-86a90503-8b95-4439-ab84-0c357d0c0523.png)
+- logo abaixo do código podemos definir o email e demais configurações
+![12](https://user-images.githubusercontent.com/94761781/208378823-2742e46c-0ffc-4dba-b187-680a1fd532bc.png)
+
+
+> Agora, basta executar o aplicativo node.js pelo comando abaixo, verá que o e-mail será recebido
+```node index.js```
+![13](https://user-images.githubusercontent.com/94761781/208381497-dcdeacc5-c4b8-4a9e-8ba2-f26ac70cbcdf.png)
+
+- verifque o e-mail
+![Captura de tela 2022-12-19 052125](https://user-images.githubusercontent.com/94761781/208381505-2bc0f674-e135-44cf-ae62-093542c7b245.png)
+![Captura de tela 2022-12-19 052858](https://user-images.githubusercontent.com/94761781/208381507-9a80205c-ae6c-47d2-a397-07effd148b3d.png)
+![d](https://user-images.githubusercontent.com/94761781/208381509-c9d4b69f-c95e-4d6e-9c56-610c56a78f30.png)
