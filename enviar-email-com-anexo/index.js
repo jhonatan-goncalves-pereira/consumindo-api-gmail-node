@@ -11,20 +11,21 @@ async function sendEmail() {
       auth: {
         type: "OAuth2",
         user: "jhonatan.goncalves08@aluno.ifce.edu.br",
-        clientId:CLIENT_ID,
-        clientSecret:CLIENT_SECRET,
-        accessToken: "ya29.a0AX9GBdUZ9cbpU8DrEoCcsBeuAPavk8a7OwMaqWoxPx1nXJ1f9sb3XibyiK3twbpgFIUXRRzQpF_viEitw_O_K5ho0f2xW9-HO50F-9C1gHDrc2O6aeWE2R3CehdGgg8a0QHMsTT_bVJp-8eubfHqh-xes1wh-_waCgYKAbMSAQASFQHUCsbCKiGFEGShBKwY20yN0S13PA0166",
+        clientId: CLIENT_ID,
+        clientSecret: CLIENT_SECRET,
+        //token temporário
+        accessToken: "ya29.a0AX9GBdUwt0wVe_PNZKJE5pOFA3pImtdFpAbE2qaUUI-unT1OY_BvVtUA9_4u0K5bchPpnB6KMfAB5yLo10CxKS53rXWADF_Hfbnm9KsR-9meVUkvRi-Dqr3gyfXdzI_tmQK1lCvxGNeeud50WAuc3sDD8r-I5icaCgYKAdUSAQASFQHUCsbClNUu1303-8Jop9CKxnyugg0166",
       },
     });
 
 
     //configurações do e-mail
     const mailOptions = {
-        from:"jhonatan.goncalves08@aluno.ifce.edu.br",
-        to:"jhonatangoncalves2002@gmail.com",
-        subject:"É um teste de envio de email",
-        text:"Hello, World!",
-        html:"<h1>Hello World</h1>"
+      from: "jhonatan.goncalves08@aluno.ifce.edu.br",
+      to: "jhonatangoncalves2002@gmail.com",
+      subject: "É um teste de envio de email",
+      text: "Hello, World!",
+      html: "<h1>Hello World</h1>"
     }
 
     const result = await transport.sendMail(mailOptions)
@@ -37,9 +38,9 @@ async function sendEmail() {
 }
 
 sendEmail()
-.then((result) => {
+  .then((result) => {
     console.log("Email has been sent")
-})
-.catch((error) => {
+  })
+  .catch((error) => {
     console.log(`An ${error} occured`)
-})
+  })
