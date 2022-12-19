@@ -308,6 +308,66 @@ Depois de obter o accessToken. Basta colá-lo dentro do script do index.js.
 ![13](https://user-images.githubusercontent.com/94761781/208381497-dcdeacc5-c4b8-4a9e-8ba2-f26ac70cbcdf.png)
 
 - verifque o e-mail
-![Captura de tela 2022-12-19 052125](https://user-images.githubusercontent.com/94761781/208381505-2bc0f674-e135-44cf-ae62-093542c7b245.png)
-![Captura de tela 2022-12-19 052858](https://user-images.githubusercontent.com/94761781/208381507-9a80205c-ae6c-47d2-a397-07effd148b3d.png)
-![d](https://user-images.githubusercontent.com/94761781/208381509-c9d4b69f-c95e-4d6e-9c56-610c56a78f30.png)
+- ![final](https://user-images.githubusercontent.com/94761781/208451196-eb9b1347-dd70-4967-91d2-2a52283567fc.png)
+
+## Envio de emails partindo de um Form HTML5
+- crie o arquivo form.js e digite o seguinte código;
+
+```
+ const express = require('express');
+const app = express();
+const handlebars = require('express-handlebars');
+
+//define o Handlebars
+app.engine('handlebars', handlebars.engine({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
+
+// define a rota
+app.get('/formGmail', function (req, res) {
+    res.render("formulario")
+});
+
+//define a porta
+app.listen(8000, function () {
+    console.log("Servidor rodando na porta 8000");
+});
+
+```
+
+- crie e o main Handlebars e adicione dentro de layouts
+```
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {{{body}}}
+</body>
+
+</html>
+```
+
+- crie o arquivo formulario.handlebars
+que vai conter os elementos HTML
+e o coloque na pasta views
+```
+<h2>PB AWS - Jhonatan Gonçalves Pereira</h2>
+<form action="">
+    <input type="email" placeholder="email">
+    <input type="text" placeholder="assunto">
+    <input type="text" placeholder="mensagem">
+    <button type="submit">Enviar</button>
+</form>
+```
+
+Só executar ```node form.js```
+
+#### trantando forms e enviando e-mail
+
+TEREMOS A SEGUINTE TELA USANDO HANDLEBARS
+![21](https://user-images.githubusercontent.com/94761781/208448379-1d746e46-87d0-47c1-a2f3-4862baa87a99.png)
