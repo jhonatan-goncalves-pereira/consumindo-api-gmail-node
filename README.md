@@ -249,14 +249,9 @@ As informações de autorização são armazenadas no sistema de arquivos, porta
 ![Captura de tela 2022-12-19 010009](https://user-images.githubusercontent.com/94761781/208345424-915ce043-69aa-44c3-a9c8-5299d9ca9e08.png)
 
 
-## Criar e enviar e-mails
-Há duas maneiras de enviar e-mails usando a API do Gmail:
-- enviar diretamente usando o método ```messages.send```.
-- enviar de um rascunho, usando o método ```drafts.send```.
-Os e-mails são enviados como cadeias de caracteres codificadas em base64url dentro da propriedade de um recurso de mensagem. 
+## criar e enviar e-mails
 
-##### criando mensagens
-A API do Gmail requer mensagens de e-mail MIME compatíveis com RFC 2822 e codificado como cadeias de caracteres base64url. Muitas linguagens de programação têm bibliotecas ou utilitários que simplificam o processo de criação e codificação MIME Mensagens. 
+
 
 
 
