@@ -493,6 +493,18 @@ console.log();
 
 - Só executar ```nodemon form.js```
 
+Se aparecer o erro:
+
+```
+nodemon : O termo 'nodemon' não é reconhecido como nome de cmdlet, função, arquivo de script ou programa operável. Verifique a grafia do 
+nome ou, se um caminho tiver sido incluído, veja se o caminho está correto e tente novamente.
+No linha:1 caractere:1
+...
+```
+[Acesse AQUI](https://pt.stackoverflow.com/questions/297081/nodemon-n%c3%a3o-%c3%a9-reconhecido)
+
++ nodemon form.js
+
 #### trantando forms e enviando e-mail
 
 TEREMOS A SEGUINTE TELA USANDO HANDLEBARS
