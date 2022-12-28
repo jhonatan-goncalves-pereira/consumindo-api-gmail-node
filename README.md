@@ -353,8 +353,9 @@ Envio do e-mail
 - ```npm init``` para iniciar o projeto; 
 - ```npm install express``` para adicionar o Express;
 - ```npm install express-handlebars``` para modularizar o desenvolvimento com HTML;
- ```npm install --save body-parser``` para pegar dados do formulário HTML
- ```npm install -save nodemailer``` para enviar o email
+- ```npm install --save body-parser``` para pegar dados do formulário HTML
+- ```npm install -save nodemailer``` para enviar o email
+- ```npm install -save nodemon``` para mais praticidade nos testes. Só salvar o código sem precisar parar a execução, apenas atualize a página.
 
 ----------------------
 Por seguinte, crie o arquivo form.js e digite o seguinte código;
@@ -364,10 +365,20 @@ Por seguinte, crie o arquivo form.js e digite o seguinte código;
 const express = require('express');
 const app = express();
 const handlebars = require('express-handlebars');
+const bodyParser = require('body-parser');
 
-//define o Handlebars
+//para envio do email
+const nodemailer = require("nodemailer");
+const CLIENT_ID = "##yourclientid##";
+const CLIENT_SECRET = "##yourclientsecret##";
+
+//define o template
 app.engine('handlebars', handlebars.engine({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
+
+//configuração do Body Parser
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 
 // define a rota
 app.get('/formGmail', function (req, res) {
@@ -375,19 +386,60 @@ app.get('/formGmail', function (req, res) {
 });
 
 // define a rota após o envio do form do Method GET
-app.get('/enviaEmail', function(req, res){
-    res.send("Email enviado");
+app.post('/enviaEmail', function(req, res){
+    res.send( "Foi enviado o email com o Assunto: <b>" + req.body.assunto 
+            + "</b></br> e a Mensagem: <b>"+ req.body.mensagem
+            + "</b></br> para o Email de <b>" + req.body.emailEnvio +"</b> " +
+            " </br><form action='/formGmail'> <button> Retornar</button></form>"
+            );
+            //envia o email
+            async function sendEmail() {
+                try {
+                const transport = nodemailer.createTransport({
+                service: "gmail",
+                auth: {
+                type: "OAuth2",
+                user: "jhonatan.goncalves08@aluno.ifce.edu.br",
+                clientId: CLIENT_ID,
+                clientSecret: CLIENT_SECRET,
+                //token temporário
+                accessToken: "ya29.a0AX9GBdUYjdmh2pKfaadWN19xTA30wsLU0bOxMwhutB26HyEF8Eyoi1ofR9RaWyEdCgeQFICVMveVE1_HkI6A9YijHxEYa4eemlDiJ4uGhK7A9g6BwTRH5RL_lxvySocP2jyihBUOOlqcIsJjgrm5yjTulsGfaCgYKAaoSARESFQHUCsbC-O8-DSBiQd1GpEXPA2MkWA0163",
+                },
+                });
+                 //configurações do e-mail
+                const mailOptions = {
+                from: "jhonatan.goncalves08@aluno.ifce.edu.br",
+                to:  req.body.emailEnvio,
+                subject: req.body.assunto,
+                text: req.body.mensagem,
+                html: req.body.assunto
+                }
+                const result = await transport.sendMail(mailOptions)
+                return result
+            } catch (error) {
+                console.log(error);
+            }
+            }
+            sendEmail().then((result) => {
+                alert("Email foi enviado")
+            }).catch((error) => {
+      console.log(`An ${error} occured`)
+            })
+
 });
-// se o method fosse post use app.post... 
+// se o method fosse GET use app.get... 
 
 //define a porta
 app.listen(8000, function () {
     console.log("Servidor rodando na porta 8000");
 });
-```
+
+
+console.log();
+
 ```
 
-- crie e o main Handlebars e adicione dentro de layouts
+- crie o main Handlebars e adicione dentro da pasta de view/layouts
 ```
 <html lang="en">
 
@@ -408,40 +460,38 @@ app.listen(8000, function () {
 </html>
 ```
 
-- crie o arquivo formulario.handlebars
-que vai conter os elementos HTML
-e o coloque na pasta views
+- crie o arquivo formulario.handlebars que vai conter os elementos HTML e o coloque na pasta views
 ```
 
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
-        <form method="GET" action="/enviaEmail">
+        <form method="POST" action="/enviaEmail">
             <hr>
             <h2>PB AWS - Jhonatan Gonçalves Pereira</h2>
             <hr>
             <h4>Envio de email usando API do GMAIL</h4>
             <div class="form-group">
                 <label for="exampleInputEmail1">Email</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="email">
+                <input name="emailEnvio" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="email">
                 <small id="emailHelp" class="form-text text-muted">Seus dados estão seguros.</small>
             </div>
             <div class="form-group">
                 <label>Assunto</label>
-                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Assunto">
+                <input name="assunto" type="text" class="form-control" id="exampleInputPassword1" placeholder="Assunto">
             </div>
             <div class="form-group">
                 <label>Mensagem</label>
-                <input type="text" class="form-control" id="mensagem" placeholder="Mensagem">
+                <input name="mensagem" type="text" class="form-control" id="mensagem" placeholder="Mensagem">
             </div>
 
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
     </div>
-</div>
+</div> 
 ```
 
-Só executar ```node form.js```
+- Só executar ```nodemon form.js```
 
 #### trantando forms e enviando e-mail
 

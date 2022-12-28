@@ -39,7 +39,7 @@ app.post('/enviaEmail', function(req, res){
                 clientId: CLIENT_ID,
                 clientSecret: CLIENT_SECRET,
                 //token temporário
-                accessToken: "ya29.a0AX9GBdUYjdmh2pKfaadWN19xTA30wsLU0bOxMwhutB26HyEF8Eyoi1ofR9RaWyEdCgeQFICVMveVE1_HkI6A9YijHxEYa4eemlDiJ4uGhK7A9g6BwTRH5RL_lxvySocP2jyihBUOOlqcIsJjgrm5yjTulsGfaCgYKAaoSARESFQHUCsbC-O8-DSBiQd1GpEXPA2MkWA0163",
+                accessToken: "ya29.a0AX9GBdU-eZY2St91PHUulrdB-pKj7AqjVwc3IAil6eyIQ1E_bITuf3iPUP1EFDWw4nz5tQUY1_4FA9trcWteUmdujJLy3-l3_l6x5IG61fBqW9cvgxwFmSPmySWz39J-8Z5GC6BNftbS2EKQy7duV9U_GXIdaCgYKAYQSARESFQHUCsbCB-PTssS51OTvUC0e1BXCgQ0163",
                 },
                 });
                  //configurações do e-mail
@@ -48,7 +48,7 @@ app.post('/enviaEmail', function(req, res){
                 to:  req.body.emailEnvio,
                 subject: req.body.assunto,
                 text: req.body.mensagem,
-                html: req.body.assunto
+                html: "<h1>"+req.body.assunto+"</h1>"
                 }
                 const result = await transport.sendMail(mailOptions)
                 return result
@@ -57,7 +57,7 @@ app.post('/enviaEmail', function(req, res){
             }
             }
             sendEmail().then((result) => {
-                alert("Email foi enviado")
+                console.log("Email foi enviado")
             }).catch((error) => {
       console.log(`An ${error} occured`)
             })
