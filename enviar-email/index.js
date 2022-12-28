@@ -1,7 +1,5 @@
 const nodemailer = require("nodemailer");
-
 const CLIENT_ID = "##yourclientid##";
-
 const CLIENT_SECRET = "##yourclientsecret##";
 
 async function sendEmail() {
@@ -14,7 +12,7 @@ async function sendEmail() {
         clientId: CLIENT_ID,
         clientSecret: CLIENT_SECRET,
         //token temporário
-        accessToken: "ya29.a0AX9GBdUwt0wVe_PNZKJE5pOFA3pImtdFpAbE2qaUUI-unT1OY_BvVtUA9_4u0K5bchPpnB6KMfAB5yLo10CxKS53rXWADF_Hfbnm9KsR-9meVUkvRi-Dqr3gyfXdzI_tmQK1lCvxGNeeud50WAuc3sDD8r-I5icaCgYKAdUSAQASFQHUCsbClNUu1303-8Jop9CKxnyugg0166",
+        accessToken: "ya29.a0AX9GBdUYjdmh2pKfaadWN19xTA30wsLU0bOxMwhutB26HyEF8Eyoi1ofR9RaWyEdCgeQFICVMveVE1_HkI6A9YijHxEYa4eemlDiJ4uGhK7A9g6BwTRH5RL_lxvySocP2jyihBUOOlqcIsJjgrm5yjTulsGfaCgYKAaoSARESFQHUCsbC-O8-DSBiQd1GpEXPA2MkWA0163",
       },
     });
 
@@ -22,7 +20,7 @@ async function sendEmail() {
     //configurações do e-mail
     const mailOptions = {
       from: "jhonatan.goncalves08@aluno.ifce.edu.br",
-      to: "jhonatangoncalves2002@gmail.com",
+      to: "admjhonatancr7@gmail.com",
       subject: "É um teste de envio de email",
       text: "Hello, World!",
       html: "<h1>Hello World</h1>"
@@ -39,7 +37,7 @@ async function sendEmail() {
 
 sendEmail()
   .then((result) => {
-    console.log("Email has been sent")
+    console.log("Email foi enviado")
   })
   .catch((error) => {
     console.log(`An ${error} occured`)

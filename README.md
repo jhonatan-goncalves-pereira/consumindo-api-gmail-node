@@ -83,7 +83,7 @@ Para a maioria dos aplicativos da Web, a API do Gmail é a melhor escolha para a
 ##### ⚠️requisitos para consumir api GMAIL na prática
 
 > - Um **projeto do Google Cloud** (é a base para criar, ativar e usar todos os serviços do Google Cloud, incluindo gerenciar APIs, ativar o faturamento, adicionar e remover colaboradores e gerenciar permissões.).
-se não tiver o projeto, acesse ➡️ [ criar projeto do Google CLoud](https://developers.google.com/workspace/guides/create-projecthttps://developers.google.com/workspace/guides/create-project)
+se não tiver o projeto, acesse ➡️ [ criar projeto do Google CLoud](https://cloud.google.com/appengine/docs/standard/python3/building-app/creating-gcp-project?hl=pt-br)
 ![05](https://user-images.githubusercontent.com/94761781/208336844-007472ff-c66e-4f8c-9a72-4cab7ce525ce.png)
 Se na criação do seu projeto do Google Cloud não aparecer a organização, você deverá usar outra conta que tenha a devida vinculação, caso contrário seguirá com um acesso restringindo.
 > - Uma **Conta do Google com o Gmail ativado**.
@@ -97,7 +97,7 @@ Partindo desses requisitos agora é necessário ativar a API do GMAIL no projeto
 ![06](https://user-images.githubusercontent.com/94761781/208337466-4e0e5c9e-694d-4ce1-a089-667f8aafd102.png)
 
 
-Caso não encontre no seu console do Google Cloud, ative a API do Gmail, acesse: [Ativar API GMAIL ](https://console.cloud.google.com/flows/enableapihttps://console.cloud.google.com/flows/enableapi)
+Caso não encontre no seu console do Google Cloud, ative a API do Gmail, acesse: [Ativar API GMAIL ](https://console.cloud.google.com/apis/)
 esse link te levará para essa tela diretamente, basta você ativar.
 ![04 - console](https://user-images.githubusercontent.com/94761781/208336476-0029b9cc-346a-4c3c-bac3-ce1848bb3ca5.png)
 
@@ -122,6 +122,7 @@ Agora insira os emails dos usuários para testes
 ![11](https://user-images.githubusercontent.com/94761781/208341435-7ac9f84e-a331-4963-bcf8-a5117edf97aa.png)
 
 > retorne à tela e clique em em Criar Credenciais > ID do cliente OAuth.
+Saiba mais sobre o [OAuth](https://nodemailer.com/smtp/oauth2/)
 ![06](https://user-images.githubusercontent.com/94761781/208342138-e2bab7b8-ebc2-46e8-a1b4-c381faceb0b8.png)
 
 >- Clique em Tipo de aplicativo > aplicativo Área de Trabalho.
@@ -256,7 +257,7 @@ Isso criará o arquivo package.json para o projeto.
 - Express será o servidor web para esta aplicação e nodemailer nos permitirá enviar mensagens usando a api do gmail.
 
 
-- crie o arquivo index.js e agtribua o seguinte código:
+- crie o arquivo index.js e atribua o seguinte código:
 ```
 const nodemailer = require("nodemailer");
 
@@ -270,7 +271,7 @@ async function sendEmail() {
       service: "gmail",
       auth: {
         type: "OAuth2",
-        user: "geekygautam1997@gmail.com",
+        user: "jhonatan.goncalves08@aluno.ifce.edu.br",
         clientId:CLIENT_ID,
         clientSecret:CLIENT_SECRET,
         accessToken: "##youraccesstoken##",
@@ -278,10 +279,10 @@ async function sendEmail() {
     });
 
     const mailOptions = {
-        from:"geekygautam1997@gmail.com",
-        to:"sharmagautam1997dob@gmail.com",
-        subject:"this is the test email",
-        text:"hello this is the body of the email",
+        from:"jhonatan.goncalves08@aluno.ifce.edu.br",
+        to:"admjhonatancr7@gmail.com",
+        subject:"Teste de envio de email",
+        text:"Olá, corpo do email",
         html:"<h1>Hello World</h1>"
     }
 
@@ -296,7 +297,7 @@ async function sendEmail() {
 
 sendEmail()
 .then((result) => {
-    console.log("Email has been sent")
+    console.log("Email foi enviado")
 })
 .catch((error) => {
     console.log(`An ${error} occured`)
@@ -348,10 +349,19 @@ Envio do e-mail
 
 
 ## Envio de emails partindo de um Form HTML5
-- crie o arquivo form.js e digite o seguinte código;
+##### crie uma pasta para essa codificação e inicie o projeto em node com 
+- ```npm init``` para iniciar o projeto; 
+- ```npm install express``` para adicionar o Express;
+- ```npm install express-handlebars``` para modularizar o desenvolvimento com HTML;
+ ```npm install --save body-parser``` para pegar dados do formulário HTML
+ ```npm install -save nodemailer``` para enviar o email
+
+----------------------
+Por seguinte, crie o arquivo form.js e digite o seguinte código;
+
 
 ```
- const express = require('express');
+const express = require('express');
 const app = express();
 const handlebars = require('express-handlebars');
 
@@ -364,11 +374,17 @@ app.get('/formGmail', function (req, res) {
     res.render("formulario")
 });
 
+// define a rota após o envio do form do Method GET
+app.get('/enviaEmail', function(req, res){
+    res.send("Email enviado");
+});
+// se o method fosse post use app.post... 
+
 //define a porta
 app.listen(8000, function () {
     console.log("Servidor rodando na porta 8000");
 });
-
+```
 ```
 
 - crie e o main Handlebars e adicione dentro de layouts
@@ -380,10 +396,13 @@ app.listen(8000, function () {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 
 <body>
-    {{{body}}}
+    {{{ body }}}
+
 </body>
 
 </html>
@@ -393,13 +412,33 @@ app.listen(8000, function () {
 que vai conter os elementos HTML
 e o coloque na pasta views
 ```
-<h2>PB AWS - Jhonatan Gonçalves Pereira</h2>
-<form action="">
-    <input type="email" placeholder="email">
-    <input type="text" placeholder="assunto">
-    <input type="text" placeholder="mensagem">
-    <button type="submit">Enviar</button>
-</form>
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <form method="GET" action="/enviaEmail">
+            <hr>
+            <h2>PB AWS - Jhonatan Gonçalves Pereira</h2>
+            <hr>
+            <h4>Envio de email usando API do GMAIL</h4>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="email">
+                <small id="emailHelp" class="form-text text-muted">Seus dados estão seguros.</small>
+            </div>
+            <div class="form-group">
+                <label>Assunto</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Assunto">
+            </div>
+            <div class="form-group">
+                <label>Mensagem</label>
+                <input type="text" class="form-control" id="mensagem" placeholder="Mensagem">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+</div>
 ```
 
 Só executar ```node form.js```
